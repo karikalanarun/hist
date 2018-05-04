@@ -1,0 +1,12 @@
+html, body, #main, .histogram-c {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+
+.histogram-c {
+    display: flex;
+}
+.histogram {
+    flex: 1;
+}
