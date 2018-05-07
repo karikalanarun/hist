@@ -4,9 +4,119 @@ html, body, #main, .histogram-c {
     margin: 0px;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .histogram-c {
     display: flex;
 }
 .histogram {
     flex: 1;
+}
+
+html, body, #main {
+    background: #424242;
+    font-family: 'Lato', sans-serif;
+}
+
+#main {
+    display: flex;
+    flex-direction: row;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+.header.hide > .header-content {
+    margin-left: -245px;    
+}
+
+
+.header-content{
+    transition: 150ms ease-in all;
+    padding: 10px 24px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #393939;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.header-content .label {
+    color: rgb(163, 156, 156);
+}
+
+.toggle {
+    padding: 7px 22px;
+    background: #393939;
+    margin-left: -15px;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.toggle:hover .toggle-icon{
+    color: #beb0b0 !important;
+}
+
+.toggle-wrapper {
+    transition: 150ms ease-in transform;
+}
+.viz-area {
+    flex: 1;
+}
+
+.header.hide .toggle-wrapper {
+    transform: rotate(180deg);
+    margin-left: 18px;
+}
+
+.toggle-icon {
+    transition: 150ms ease-in transform;
+    transition: 100ms ease-in color;
+    margin: -20px;
+    color: #6e6767;
+}
+
+.toggle-icon::before {
+    font-size: 10px !important;
+}
+
+.rect-bar {
+    /* fill: rgb(0, 236, 150); */
+    fill: rgb(0, 236, 150);
+    
+}
+
+.x-axis path, .y-axis path, .tick line{
+    /* stroke: rgb(0, 236, 150); */
+    stroke: #c2bead;
+}
+
+.tick text {
+    fill: rgb(163, 156, 156);
+}
+
+.histogram-c {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-field {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 5px;
+}
+
+.time-field {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 5px;
+}
+
+.ticker-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: rgb(163, 156, 156);
 }

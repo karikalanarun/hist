@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Histogram</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/main.css" />
+    <link href="/styles/fonts/Lato/Lato-Regular.ttf" rel="application/x-font-ttf">
+    <link rel="stylesheet" type="text/css" href="/styles/icons/my-icons-collection/font/flaticon.css">
     <script src="./node_modules/d3/dist/d3.min.js"></script>
     <script src="./node_modules/date-and-time/date-and-time.min.js"></script>
     <script src="./js/utils/utils.js"></script>
     <script src="./js/histogram.view.js"></script>
     <script src="./js/main.js"></script>
 </head>
+
 <body>
 
     <div id="main">
-        <div class="header">
-            <div class="ticker">
-                <span class="label">Ticker : </span>
-                <select id="ticker-select">
-                    <option value="C" selected>C</option>
-                    <option value="ESP">ESP</option>
-                    <option value="MSFT">MSFT</option>
-                    <option value="SPY">SPY</option>
-                </select>
-            </div>
-            <div class="interval">
-                <span class="label"> Increment : </span>
-                <span class="label value" id="increment-value"> 0.01 </span>
-                <div class="interval-range-c">
-                    <span class="label">0.01</span>
-                    <input type="range" min="1" max="10" value="1" id="increment-range">
-                    <span class="label">0.1</span>
+        <div class="header" id="filter-c">
+            <div class="header-content">
+                <div class="ticker filter-field">
+                    <span class="label">Ticker : </span>
+                    <select id="ticker-select">
+                        <option value="C" selected>C</option>
+                        <option value="ESP">ESP</option>
+                        <option value="MSFT">MSFT</option>
+                        <option value="SPY">SPY</option>
+                    </select>
                 </div>
-                <div class="time-interval-c">
-                    <span class="label"> Time : </span>
-                    <div class="start-time">
+                <div class="interval filter-field">
+                    <span class="label"> Increment :
+                        <span class="label value" id="increment-value"> 0.01 </span>
+                    </span>
+                    <div class="interval-range-c">
+                        <span class="label">0.01</span>
+                        <input type="range" min="1" max="10" value="1" id="increment-range">
+                        <span class="label">0.1</span>
+                    </div>
+                </div>
+                <div class="time-interval-c filter-field">
+                    <div class="start-time time-field">
                         <span class="label">Start Time : </span>
                         <div class="start-time-value-c">
                             <input class="time-input" id="start-hour" type="number" min="9" max="11" value="9">
@@ -44,7 +50,7 @@
                             <input class="time-input" id="start-m-sec" type="number" min="0" max="9" value="0">
                         </div>
                     </div>
-                    <div class="end-time">
+                    <div class="end-time time-field">
                         <span class="label">End Time : </span>
                         <div class="end-time-value-c">
                             <input class="time-input" id="end-hour" type="number" min="09" max="11" value="11">
@@ -55,17 +61,29 @@
                     </div>
                     <div class="end-time"></div>
                 </div>
-                
+
+            </div>
+            <div class="header-tail">
+                <div class="toggle" toggle-for="#filter-c" toggle-class="hide">
+                    <div class="toggle-wrapper">
+                        <i class="flaticon-left-arrow toggle-icon"></i>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <div class="viz-area" id="viz-c"></div>
     </div>
     <template id="histogram-view-template">
         <!-- *-c is for container -->
         <div class="histogram-c">
             <svg class="histogram"></svg>
+            <div class="ticker-label">
+                <div class="label-text"> C </div>
+            </div>
         </div>
-        
+
     </template>
 </body>
+
 </html>

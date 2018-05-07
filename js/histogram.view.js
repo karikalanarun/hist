@@ -25,8 +25,8 @@ function addSizeIfInRange (bin) {
 }
 
 function HistogramView(margin) {
-    
     this.el = document.importNode(document.querySelector(HISTOGRAM_VIEW_TEMPLATE_SELECTOR).content, true).children[0];
+    this.el.querySelector(".label-text").innerText = margin.label;
     this.svg = this.el.querySelector(HISTOGRAM_SVG_SELECTOR);
     this.margin = margin;
     this.d3Svg = d3.select(this.svg);
@@ -78,7 +78,7 @@ HistogramView.prototype.draw = function (data) {
             return "translate(" + 0 +", " + self.yScale(d.end)+ ")";
         })
 
-    bars.append("rect").attr("fill", "steelblue").attr("x", 0).attr("height", function (d) {     
+    bars.append("rect").attr("class", "rect-bar").attr("x", 0).attr("height", function (d) {     
         return self.yScale(d.start) - self.yScale(d.end);
     }).attr("y", function () {
         return d3.select(this).attr("height")/2;

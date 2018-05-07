@@ -1,4 +1,5 @@
 var MAIN_DIV_SELECTOR = "#main";
+var VIZ_DIV_SELECTOR = "#viz-c";
 var TICKER_SELECT = "#ticker-select";
 var HISTOGRAM_SELECTOR = ".histogram-c";
 var INCREMENT_RANGE_SELECTOR = "#increment-range";
@@ -16,8 +17,8 @@ function createHistogram (ticker, data) {
     });
     console.log(data);
     var bins = utils.getBins(utils.getTickerData(ticker, data), getIncreamentValue());
-    var histogram = new HistogramView({ left: 100, right: 100, top: 100, bottom: 100 });
-    document.querySelector(MAIN_DIV_SELECTOR).appendChild(histogram.el);
+    var histogram = new HistogramView({ label: ticker,left: 100, right: 100, top: 100, bottom: 100 });
+    document.querySelector(VIZ_DIV_SELECTOR).appendChild(histogram.el);
     histogram.draw(bins);
 }
 
@@ -50,10 +51,25 @@ function getEndTime () {
     return date.parse([[prefixZero(HOUR), prefixZero(MIN), prefixZero(SEC)].join(":"), MSEC].join("."), 'hh:mm:ss.SSS');
 }
 
+function toggleHandler (e) {
+    console.log(this, e);
+    var elementToToggle = document.querySelector(this.getAttribute("toggle-for"));
+    var toggleClass = this.getAttribute("toggle-class");
+    if (elementToToggle.classList.contains(toggleClass)) {
+        elementToToggle.classList.remove(toggleClass);
+    } else {
+        elementToToggle.classList.add(toggleClass);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function (event) {
     var selectElement = document.querySelector(TICKER_SELECT);
     var incrementRange = document.querySelector(INCREMENT_RANGE_SELECTOR);
     var defaultTicker = selectElement.options[selectElement.selectedIndex || 0].value;
+    console.log(document.querySelectorAll(".toggle"));
+    document.querySelectorAll(".toggle").forEach(function (el) {
+        el.addEventListener("click", toggleHandler);
+    });
 
     d3.csv("data/SampleTrades.csv", function (d) {
         return {
