@@ -78,8 +78,10 @@ HistogramView.prototype.draw = function (data) {
             return "translate(" + 0 +", " + self.yScale(d.end)+ ")";
         })
 
-    bars.append("rect").attr("fill", "steelblue").attr("x", 0).attr("y", 0).attr("height", function (d) {     
+    bars.append("rect").attr("fill", "steelblue").attr("x", 0).attr("height", function (d) {     
         return self.yScale(d.start) - self.yScale(d.end);
+    }).attr("y", function () {
+        return d3.select(this).attr("height")/2;
     }).attr("width", function (d) { return 0; }).transition().duration(750).attr("width", function (d) {
         return self.xScale(d.size);
     });
