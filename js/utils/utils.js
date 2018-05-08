@@ -1,10 +1,12 @@
 (function (exports) {
 
-    function createBin (start, end, size) {
-        return {start, end, size};
+    function createBin(start, end, size, eachBin) {
+        var bin = {start, end, size};
+        return (eachBin && (eachBin(bin) || bin)) || bin;
     }
 
     function priceIsInBinRange (price, bin) {
+        price = Math.round(price * 100)/100;
         return bin.start <= price && price <= bin.end;
     }
 
@@ -14,7 +16,7 @@
         });
     }
 
-    exports.getBins = function (data, priceInterval) {
+    exports.getBins = function (data, priceInterval, eachBin) {
         data = data.sort(function (datum1, datum2) {
             return datum1.price - datum2.price;
         });
@@ -24,10 +26,10 @@
                 if (priceIsInBinRange(datum.price, lastBin)) {
                     lastBin.size += datum.size;
                 } else {
-                    bins.push(createBin(datum.price, datum.price + priceInterval, datum.size))
+                    bins.push(createBin(datum.price, datum.price + priceInterval, datum.size, eachBin))
                 }
             } else {
-                bins.push(createBin(datum.price, datum.price + priceInterval, datum.size))
+                bins.push(createBin(datum.price, datum.price + priceInterval, datum.size, eachBin))
             }
             return bins;
         }, []);

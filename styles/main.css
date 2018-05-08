@@ -85,7 +85,11 @@ html, body, #main {
 .rect-bar {
     /* fill: rgb(0, 236, 150); */
     fill: rgb(0, 236, 150);
-    
+    cursor: pointer;
+}
+
+.rect-bar:hover {
+    fill: #04ad6d;
 }
 
 .x-axis path, .y-axis path, .tick line{

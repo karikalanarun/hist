@@ -16,7 +16,11 @@ function createHistogram (ticker, data) {
         return startTime <= datum.time && datum.time <= endTime;
     });
     console.log(data);
-    var bins = utils.getBins(utils.getTickerData(ticker, data), getIncreamentValue());
+    var bins = utils.getBins(utils.getTickerData(ticker, data), getIncreamentValue(), function (bin) {
+        bin.start = Math.round(bin.start * 100) / 100;
+        bin.end = Math.round(bin.end * 100) / 100;
+        return bin;
+    });
     var histogram = new HistogramView({ label: ticker,left: 100, right: 100, top: 100, bottom: 100 });
     document.querySelector(VIZ_DIV_SELECTOR).appendChild(histogram.el);
     histogram.draw(bins);
